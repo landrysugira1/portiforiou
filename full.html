@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio of Sugira Landry - Full-Stack Learner, Projects, Skills, Courses, Certificates, and Contact.">
+<meta name="keywords" content="Sugira Landry, Portfolio, Developer, Projects, Skills, Courses, Certificates">
+<title>Sugira Landry | Portfolio</title>
+<link rel="icon" href="https://via.placeholder.com/32" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f9f9f9; --text:#222; --card:#fff; --primary:#4f46e5; --shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+.dark { --bg:#0f172a; --text:#e2e8f0; --card:#1e293b; --primary:#6366f1; --shadow:0 4px 12px rgba(255,255,255,0.1);}
+*{box-sizing:border-box;scroll-behavior:smooth;}
+body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);transition:background 0.5s,color 0.5s;display:flex;flex-direction:column;overflow-x:hidden;}
+header, section{opacity:0;transform:translateY(20px);transition:opacity 1s,transform 1s;}
+header.show, section.show{opacity:1;transform:translateY(0);}
+nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 220px;
+  background: var(--card);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+nav h2 {text-align:center;margin-bottom:0.5rem;}
+.menu {list-style:none;padding:0;margin:0;display:none;}
+nav:hover .menu {display:block;}
+.menu-item {padding:0.5rem;cursor:pointer;}
+main{margin-left:240px;padding:2rem;width:calc(100% - 240px);}
+header{text-align:center;padding:2rem 1rem;background:var(--card);border-radius:16px;box-shadow:var(--shadow);margin-bottom:2rem;}
+header h1{margin:1rem 0 0.5rem;}
+header p{opacity:0.8;margin:0;}
+#profileContainer{position:relative;display:inline-block;text-align:center;margin-bottom:1rem;height:150px;}
+#profileContainer img{width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow);transition:transform 0.3s;animation:pulse 2s infinite alternate;}
+#profileContainer:hover img{transform:scale(1.05);}
+.profileButtons{position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);display:flex;gap:0.5rem;opacity:0;transition:opacity 0.3s,transform 0.3s;}
+#profileContainer:hover .profileButtons{transform:translateX(-50%) translateY(0);opacity:1;}
+.profileButtons button{padding:0.4rem 0.8rem;border:none;border-radius:8px;background:var(--primary);color:#fff;cursor:pointer;font-weight:bold;box-shadow:var(--shadow);transition:transform 0.2s,background 0.3s;}
+.profileButtons button:hover{transform:scale(1.1);background:#6366f1;}
+@keyframes pulse{0%{box-shadow:0 0 10px var(--primary);}100%{box-shadow:0 0 25px var(--primary);}}
+
+/* Sections */
+section{margin-bottom:3rem;padding:2rem;background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;transition:max-height 0.5s ease;}
+h2{margin-top:0;border-left:5px solid var(--primary);padding-left:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+h2::after{content:'▼';font-size:0.8rem;transition:transform 0.3s;}
+section.collapsed h2::after{transform:rotate(-90deg);}
+section.collapsed p, section.collapsed .grid, section.collapsed .timeline, section.collapsed input, section.collapsed button, section.collapsed .gallery{display:none;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.card{background:var(--card);padding:1rem;border-radius:12px;box-shadow:var(--shadow);transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:translateY(-6px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+.timeline{position:relative;margin-top:2rem;margin-left:20px;}
+.timeline::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--primary);}
+.timeline-item{margin-bottom:2rem;position:relative;padding-left:2rem;opacity:0;transform:translateX(-50px);transition:opacity 1s,transform 1s;}
+.timeline-item.show{opacity:1;transform:translateX(0);}
+.timeline-item::before{content:"";position:absolute;left:-10px;top:5px;width:16px;height:16px;background:var(--primary);border-radius:50%;box-shadow:var(--shadow);}
+.gallery img{width:100%;border-radius:12px;box-shadow:var(--shadow);}
+#downloadCV{display:none;margin-top:1rem;padding:0.6rem 1.2rem;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:bold;cursor:pointer;box-shadow:var(--shadow);}
+button{position:relative;overflow:hidden;transition:transform 0.2s,background 0.3s;}
+button::after{content:'';position:absolute;width:100px;height:100px;background: rgba(255,255,255,0.3);border-radius:50%;opacity:0;pointer-events:none;transform:scale(0);transition:transform 0.6s,opacity 1s;}
+/* Apple-style toggle */
+.switch{position:relative;display:inline-block;width:50px;height:28px;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;cursor:pointer;background-color:#ccc;border-radius:28px;top:0;left:0;right:0;bottom:0;transition:0.4s;}
+.slider:before{position:absolute;content:"";height:22px;width:22px;left:3px;bottom:3px;background-color:white;border-radius:50%;transition:0.4s;}
+input:checked + .slider{background-color:var(--primary);}
+input:checked + .slider:before{transform:translateX(22px);}
+/* Chat styles */
+#chatFlame{position:fixed;right:20px;bottom:20px;font-size:2rem;cursor:pointer;z-index:10000;animation:flamePulse 1s infinite alternate;}
+@keyframes flamePulse{0%{transform:scale(1);}100%{transform:scale(1.3);}}
+#chatBox{position:fixed;right:20px;bottom:70px;width:300px;max-height:400px;background:var(--card);border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;font-family:'Poppins',sans-serif;z-index:9999;transform:scale(0);transform-origin:bottom right;transition:transform 0.3s ease;}
+#chatBox.active{transform:scale(1);}
+#chatHeader{background:var(--primary);color:#fff;padding:0.8rem;text-align:center;font-weight:bold;cursor:pointer;}
+#chatContent{flex:1;padding:0.5rem;overflow-y:auto;background:var(--bg);}
+.chatMessage{margin:0.3rem 0;padding:0.5rem;border-radius:8px;max-width:80%;word-wrap:break-word;}
+.userMessage{background:#6366f1;color:#fff;align-self:flex-end;}
+.botMessage{background:#e5e7eb;color:#000;align-self:flex-start;}
+#chatInputContainer{display:flex;border-top:1px solid #ccc;}
+#chatInputContainer input{flex:1;border:none;padding:0.5rem;outline:none;background:var(--bg);}
+#chatInputContainer button{background:var(--primary);border:none;color:#fff;padding:0 1rem;cursor:pointer;}
+/* Responsive */
+@media(max-width:768px){
+  nav{width:60px;padding:1rem;}
+  main{margin-left:60px;width:calc(100% - 60px);}
+  nav a{font-size:0;line-height:0;}
+  nav h2{font-size:0;margin:0;}
+}
+</style>
+</head>
+<body class="dark">
+
+<!-- Navigation -->
+<nav>
+  <h2>Menu</h2>
+  <ul class="menu">
+    <li class="menu-item" onclick="scrollToSection('about')">About</li>
+    <li class="menu-item" onclick="scrollToSection('skills')">Skills</li>
+    <li class="menu-item" onclick="scrollToSection('projects')">Projects</li>
+    <li class="menu-item" onclick="scrollToSection('contact')">Contact</li>
+  </ul>
+</nav>
+
+<!-- Dark mode toggle -->
+<label class="switch" style="position:fixed;top:20px;right:20px;z-index:1000;">
+  <input type="checkbox" id="darkToggle">
+  <span class="slider"></span>
+</label>
+
+<main>
+<header id="header">
+<div id="profileContainer">
+<img id="profilePic" src="https://via.placeholder.com/120" alt="Sugira Landry">
+<div class="profileButtons">
+<input type="file" id="profileUpload" accept="image/*" style="display:none;">
+<button id="uploadBtn" onclick="document.getElementById('profileUpload').click()">Upload</button>
+<button id="removeBtn" onclick="removeProfile()">Remove</button>
+</div>
+</div>
+<h1>Sugira Landry</h1>
+<p>Full-Stack Learner • Building Skills & Projects</p>
+</header>
+
+<!-- Sections -->
+<section id="about" class="collapsed">
+<h2>About Me</h2>
+<p>Hello! I am Sugira Landry. I’m a software developer and am upgrading my skills through projects, courses, and certificates. Welcome to my portfolio!</p>
+<p>I am passionate about coding, problem-solving, and building practical applications. My goal is to grow as a full-stack developer and contribute to impactful projects.</p>
+</section>
+
+<section id="skills" class="collapsed">
+<h2>Skills</h2>
+<div class="grid" id="skillsList"></div>
+<input id="skillInput" placeholder="Add skill"><button onclick="addSkill()">Add</button>
+</section>
+
+<section id="projects" class="collapsed">
+<h2>Projects</h2>
+<div class="grid" id="projectsList"></div>
+<input id="projectInput" placeholder="Project name"><input id="projectDate" type="month" placeholder="Date (optional)">
+<button onclick="addProject()">Add</button>
+<div class="timeline" id="projectsTimeline"></div>
+</section>
+
+<section id="courses" class="collapsed">
+<h2>Courses</h2>
+<div class="grid" id="coursesList"></div>
+<input id="courseInput" placeholder="Course name"><input id="courseDate" type="month" placeholder="Date (optional)">
+<button onclick="addCourse()">Add</button>
+<div class="timeline" id="coursesTimeline"></div>
+</section>
+
+<section id="certificates" class="collapsed">
+<h2>Certificates</h2>
+<input type="file" id="certUpload" accept="image/*">
+<button onclick="uploadCertificate()">Upload</button>
+<div class="grid gallery" id="certGallery"></div>
+</section>
+
+<section id="cv" class="collapsed">
+<h2>CV</h2>
+<input type="file" id="cvUpload" accept=".pdf,.doc,.docx">
+<p id="cvStatus">No CV uploaded.</p>
+<button id="downloadCV">⬇️ Download CV</button>
+</section>
+
+<section id="contact" class="collapsed">
+<h2>Contact Me</h2>
+<p>📧 Email: <a href="mailto:landrysugira1@gmail.com">landrysugira1@gmail.com</a></p>
+<p>📞 Phone: <a href="tel:+250792443747">+250 79 244 3747</a></p>
+<p>🌐 Website: <a href="https://sugira-portfolio.com" target="_blank">sugira-portfolio.com</a></p>
+<p>🔗 LinkedIn: <a href="https://linkedin.com/in/sugira" target="_blank">linkedin.com/in/sugira</a></p>
+<p>🐦 Twitter: <a href="https://twitter.com/sugira" target="_blank">twitter.com/sugira</a></p>
+<p>📸 Instagram: <a href="https://instagram.com/sugira" target="_blank">instagram.com/sugira</a></p>
+</section>
+</main>
+
+<!-- Chat flame -->
+<div id="chatFlame" onclick="toggleChat()">🔥</div>
+<div id="chatBox">
+<div id="chatHeader" onclick="toggleChat()">Chat with me</div>
+<div id="chatContent"></div>
+<div id="chatInputContainer">
+<input type="text" id="chatInput" placeholder="Type a message...">
+<button onclick="sendMessage()">Send</button>
+</div>
+</div>
+
+<script>
+// Helper: scroll to section
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+// Loader animations
+window.addEventListener('load',()=>{
+  document.getElementById("header").classList.add("show");
+  document.querySelectorAll("section").forEach(sec=>sec.classList.add("show"));
+  updateProfileButtons();
+  const savedProfile=localStorage.getItem("profilePic");
+  if(savedProfile) document.getElementById("profilePic").src=savedProfile;
+  if(localStorage.getItem("cvFile")){
+    document.getElementById("cvStatus").innerText="Uploaded: "+localStorage.getItem("cvName");
+    document.getElementById("downloadCV").style.display="inline-block";
+  }
+});
+
+// Dark mode toggle
+document.getElementById("darkToggle").addEventListener("change",function(){
+  document.body.classList.toggle("dark");
+});
+
+// Profile
+function updateProfileButtons(){
+  const pic = localStorage.getItem("profilePic");
+  document.getElementById("uploadBtn").style.display = pic ? "none" : "inline-block";
+  document.getElementById("removeBtn").style.display = pic ? "inline-block" : "none";
+}
+document.getElementById('profileUpload').addEventListener('change',function(){
+  let file=this.files[0];
+  if(file){
+    const reader=new FileReader();
+    reader.onload=function(e){
+      document.getElementById('profilePic').src=e.target.result;
+      localStorage.setItem("profilePic",e.target.result);
+      updateProfileButtons();
+    }
+    reader.readAsDataURL(file);
+  }
+});
+function removeProfile(){
+  localStorage.removeItem("profilePic");
+  document.getElementById("profilePic").src="https://via.placeholder.com/120";
+  updateProfileButtons();
+}
+
+// Skills
+let skills=JSON.parse(localStorage.getItem("skills")||"[]");
+function renderSkills(){
+  const el=document.getElementById("skillsList"); el.innerHTML="";
+  skills.forEach((s,i)=>{el.innerHTML+=`<div class="card">${s} <button onclick="delItem('skills',${i})">❌</button></div>`});
+}
+renderSkills();
+function addSkill(){
+  let v=document.getElementById("skillInput").value;
+  if(v){skills.push(v);localStorage.setItem("skills",JSON.stringify(skills));renderSkills();document.getElementById("skillInput").value="";}
+}
+
+// Projects
+let projects=JSON.parse(localStorage.getItem("projects")||"[]");
+function renderProjects(){
+  const el=document.getElementById("projectsList"); el.innerHTML="";
+  projects.forEach((p,i)=>{el.innerHTML+=`<div class="card">${p} <button onclick="delItem('projects',${i})">❌</button></div>`});
+  renderTimeline("projectsTimeline",projects);
+}
+function addProject(){
+  let v=document.getElementById("projectInput").value;
+  let d=document.getElementById("projectDate").value;
+  if(v){
+    let item=d?`${v} (${d})`:v;
+    projects.push(item);
+    localStorage.setItem("projects",JSON.stringify(projects));
+    renderProjects();
+    document.getElementById("projectInput").value="";document.getElementById("projectDate").value="";
+  }
+}
+renderProjects();
+
+// Courses
+let courses=JSON.parse(localStorage.getItem("courses")||"[]");
+function renderCourses(){
+  const el=document.getElementById("coursesList"); el.innerHTML="";
+  courses.forEach((c,i)=>{el.innerHTML+=`<div class="card">${c} <button onclick="delItem('courses',${i})">❌</button></div>`});
+  renderTimeline("coursesTimeline",courses);
+}
+function addCourse(){
+  let v=document.getElementById("courseInput").value;
+  let d=document.getElementById("courseDate").value;
+  if(v){
+    let item=d?`${v} (${d})`:v;
+    courses.push(item);
+    localStorage.setItem("courses",JSON.stringify(courses));
+    renderCourses();
+    document.getElementById("courseInput").value="";document.getElementById("courseDate").value="";
+  }
+}
+renderCourses();
+
+// Certificates
+let certs=JSON.parse(localStorage.getItem("certs")||"[]");
+function uploadCertificate(){
+  let file=document.getElementById("certUpload").files[0];
+  if(file){
+    const reader=new FileReader();
+    reader.onload=function(e){
+      certs.push(e.target.result);
+      localStorage.setItem("certs",JSON.stringify(certs));
+      renderCerts();
+    }
+    reader.readAsDataURL(file);
+  }
+}
+function renderCerts(){
+  const el=document.getElementById("certGallery"); el.innerHTML="";
+  certs.forEach((c,i)=>{el.innerHTML+=`<div class="card"><img src="${c}"><button onclick="delCert(${i})">❌</button></div>`});
+}
+function delCert(i){certs.splice(i,1);localStorage.setItem("certs",JSON.stringify(certs));renderCerts();}
+renderCerts();
+
+// CV
+document.getElementById("cvUpload").addEventListener("change",function(){
+  let file=this.files[0];
+  if(file){const reader=new FileReader();
+    reader.onload=function(e){
+      localStorage.setItem("cvFile",e.target.result);
+      localStorage.setItem("cvName",file.name);
+      document.getElementById("cvStatus").innerText="Uploaded: "+file.name;
+      document.getElementById("downloadCV").style.display="inline-block";
+    }
+    reader.readAsDataURL(file);
+  }
+});
+document.getElementById("downloadCV").addEventListener("click",function(){
+  let data=localStorage.getItem("cvFile");
+  if(data){let a=document.createElement("a");a.href=data;a.download=localStorage.getItem("cvName");a.click();}
+});
+
+// Timeline helper
+function renderTimeline(id,arr){
+  const t=document.getElementById(id); t.innerHTML="";
+  arr.forEach(v=>{t.innerHTML+=`<div class="timeline-item"><div class="card">${v}</div></div>`});
+  setTimeout(()=>{document.querySelectorAll(`#${id} .timeline-item`).forEach(i=>i.classList.add("show"));},100);
+}
+
+// Delete generic
+function delItem(type,i){
+  if(type==="skills"){skills.splice(i,1);localStorage.setItem("skills",JSON.stringify(skills));renderSkills();}
+  if(type==="projects"){projects.splice(i,1);localStorage.setItem("projects",JSON.stringify(projects));renderProjects();}
+  if(type==="courses"){courses.splice(i,1);localStorage.setItem("courses",JSON.stringify(courses));renderCourses();}
+}
+
+// Section collapse
+document.querySelectorAll("section h2").forEach(h=>{
+  h.addEventListener("click",()=>{h.parentElement.classList.toggle("collapsed");});
+});
+
+// Chat
+function toggleChat(){document.getElementById("chatBox").classList.toggle("active");}
+function sendMessage(){
+  const input=document.getElementById("chatInput");
+  const val=input.value.trim();
+  if(!val) return;
+  const content=document.getElementById("chatContent");
+  content.innerHTML+=`<div class="chatMessage userMessage">${val}</div>`;
+  input.value="";content.scrollTop=content.scrollHeight;
+  setTimeout(()=>{content.innerHTML+=`<div class="chatMessage botMessage">Hi! Thanks for your message contact sugira the coder on 📧 Email: landrysugira1@gmail.com
+  📞 Phone: +250 79 244 3747
+  🌐 Website: https://sugira-portfolio.com
+  🔗 LinkedIn: https://linkedin.com/in/sugira
+  🐦 Twitter: https://twitter.com/sugira
+  📸 Instagram: https://instagram.com/sugira.</div>`;content.scrollTop=content.scrollHeight;},600);
+}
+</script>
+</body>
+</html>
